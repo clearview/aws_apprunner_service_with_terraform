@@ -1,13 +1,8 @@
 
-```mermaid
-graph TB
-  subgraph TOP["Analysis"]
-  end
-  end
-    %% TOP
-
-  %% Subgraph connections
-  one-->two
-  two-->three
-  three-->four
+```zenuml
+    title Declare participant (optional)
+    Bob
+    Alice
+    Alice->Bob: Hi Bob
+    Bob->Alice: Hi Alice
   ```
