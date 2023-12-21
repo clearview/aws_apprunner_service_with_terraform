@@ -1,0 +1,29 @@
+    @startuml
+
+    !define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v11.1/dist
+    !includeurl AWSPuml/AWSCommon.puml
+    !includeurl AWSPuml/GroupIcons/Region.puml
+    !includeurl AWSPuml/NetworkingContentDelivery/VirtualPrivateCloud.puml
+    !includeurl AWSPuml/Compute/AppRunner.puml
+    !includeurl AWSPuml/Containers/ElasticContainerRegistry.puml
+    !includeurl AWSPuml/Containers/ElasticContainerRegistryImage.puml  
+
+    Region("AWSRegion", "us-east-1", "region") {
+        VirtualPrivateCloud("VPC", "VPC", "Amazon VPC") {
+            AppRunner("API", "API service", "NodeJS")
+            AppRunner("FE", "Frontend service", "NuxtJS")
+        }
+    ElasticContainerRegistry("ECR_API", "ECR", "NodeJSt") {
+        ElasticContainerRegistryImage("API_ECR_IMAGE", "API Container image", "NodeJSs")
+    }
+    ElasticContainerRegistry("ECR_FE", "ECR", "NodeJSt") {
+        ElasticContainerRegistryImage("FE_ECR_IMAGE", "FE Container image", "NodeJSs")
+    }
+    }
+ 
+    ingress -u-> FE
+    FE --> API
+    API_ECR_IMAGE -> API
+    FE_ECR_IMAGE -> FE
+    
+    @enduml
