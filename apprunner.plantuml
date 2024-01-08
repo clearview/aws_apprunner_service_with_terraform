@@ -1,4 +1,4 @@
-    @startuml
+    @startuml apprunner
 
     !define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v11.1/dist
     !includeurl AWSPuml/AWSCommon.puml
@@ -6,7 +6,7 @@
     !includeurl AWSPuml/NetworkingContentDelivery/VirtualPrivateCloud.puml
     !includeurl AWSPuml/Compute/AppRunner.puml
     !includeurl AWSPuml/Containers/ElasticContainerRegistry.puml
-    !includeurl AWSPuml/Containers/ElasticContainerRegistryImage.puml  
+    !includeurl AWSPuml/Containers/ElasticContainerRegistryImage.puml
 
     Region("AWSRegion", "us-east-1", "region") {
         VirtualPrivateCloud("VPC", "VPC", "Amazon VPC") {
@@ -20,10 +20,10 @@
         ElasticContainerRegistryImage("FE_ECR_IMAGE", "FE Container image", "NodeJSs")
     }
     }
- 
+
     ingress -u-> FE
     FE --> API
     API_ECR_IMAGE -> API
     FE_ECR_IMAGE -> FE
-    
+
     @enduml
