@@ -7,7 +7,7 @@ https://github.com/clearview/aws_apprunner_service_with_terraform/blob/e4c96bc5e
 
 # AppRunner Services
 
-![Alt text](out/apprunner.png?raw=true "AWS apprunner")
+![Alt text](out/apprunner/apprunner.png?raw=true "AWS apprunner")
 
 ## API
 
