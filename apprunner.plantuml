@@ -31,7 +31,7 @@ AWSCloudGroup(aws_cloud, "AWS Cloud") {
             AppRunner(api, "API service", "NodeJS")
             AppRunner(fe, "Frontend service", "NuxtJS")
         }
-        ElasticContainerRegistry(ecr_api, "ECR", "NodeJS") {
+        ElasticContainerRegistry(ecr_api, "ECR", "No    deJS") {
             ElasticContainerRegistryImage(api_ecr_image, "API Container image", "NodeJSs")
         }
         ElasticContainerRegistry(ecr_fe, "ECR", "NuxtJS") {
@@ -40,9 +40,19 @@ AWSCloudGroup(aws_cloud, "AWS Cloud") {
     }
 }
 
-ingress -u-> fe
-fe --> api
-api_ecr_image -> api
-fe_ecr_image -> fe
+ingress <-[dashed,$AWS_COLOR_GALAXY]u----> fe
+
+
+'ECR Image to AppRunner '
+api_ecr_image -[$AWS_COLOR_SMILE]----> api : pull container image
+fe_ecr_image -[$AWS_COLOR_SMILE]----> fe : pull container image
+
+'AppRunner to AppRunner '
+fe -[$AWS_COLOR_SMILE]-> api
+
+'Positioning'
+ecr_api -[hidden]left--------> ecr_fe
+vpc -[hidden]up--> fe
+vpc -[hidden]down--> api
 
 @enduml
