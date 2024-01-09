@@ -32,10 +32,10 @@ AWSCloudGroup(aws_cloud, "AWS Cloud") {
             AppRunner(fe, "Frontend service", "NuxtJS")
         }
         ElasticContainerRegistry(ecr_api, "ECR", "NodeJS") {
-            ElasticContainerRegistryImage(api_ecr_image, "API Container image", "NodeJSs")
+            ElasticContainerRegistryImage(api_ecr_image, "API Container image", "NodeJS")
         }
         ElasticContainerRegistry(ecr_fe, "ECR", "NuxtJS") {
-            ElasticContainerRegistryImage(fe_ecr_image, "FE Container image", "NodeJSs")
+            ElasticContainerRegistryImage(fe_ecr_image, "FE Container image", "NuxtJS")
         }
     }
 }
