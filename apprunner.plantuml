@@ -1,29 +1,48 @@
-    @startuml apprunner
+@startuml apprunner
 
-    !define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v11.1/dist
-    !includeurl AWSPuml/AWSCommon.puml
-    !includeurl AWSPuml/GroupIcons/Region.puml
-    !includeurl AWSPuml/NetworkingContentDelivery/VirtualPrivateCloud.puml
-    !includeurl AWSPuml/Compute/AppRunner.puml
-    !includeurl AWSPuml/Containers/ElasticContainerRegistry.puml
-    !includeurl AWSPuml/Containers/ElasticContainerRegistryImage.puml
+!$AWS_DARK = false
 
-    Region("AWSRegion", "us-east-1", "region") {
-        VirtualPrivateCloud("VPC", "VPC", "Amazon VPC") {
-            AppRunner("API", "API service", "NodeJS")
-            AppRunner("FE", "Frontend service", "NuxtJS")
+left to right direction
+
+
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v17.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/Groups/all.puml
+!include AWSPuml/Groups/AWSCloud.puml
+!include AWSPuml/Groups/Region.puml
+!include AWSPuml/NetworkingContentDelivery/VirtualPrivateCloud.puml
+
+!include AWSPuml/Compute/AppRunner.puml
+!include AWSPuml/Containers/all.puml
+!include AWSPuml/Containers/ElasticContainerRegistryImage.puml
+
+' Groups are rectangles with a custom style using stereotype - need to hide
+hide stereotype
+skinparam linetype ortho
+skinparam rectangle {
+    BackgroundColor AWS_BG_COLOR
+    BorderColor transparent
+    Shadowing false
+}
+
+AWSCloudGroup(aws_cloud, "AWS Cloud") {
+    RegionGroup(aws_region, "us-east-1") {
+        VirtualPrivateCloud(vpc, "VPC", "Amazon VPC") {
+            AppRunner(api, "API service", "NodeJS")
+            AppRunner(fe, "Frontend service", "NuxtJS")
         }
-    ElasticContainerRegistry("ECR_API", "ECR", "NodeJSt") {
-        ElasticContainerRegistryImage("API_ECR_IMAGE", "API Container image", "NodeJSs")
+        ElasticContainerRegistry(ecr_api, "ECR", "NodeJS") {
+            ElasticContainerRegistryImage(api_ecr_image, "API Container image", "NodeJSs")
+        }
+        ElasticContainerRegistry(ecr_fe, "ECR", "NuxtJS") {
+            ElasticContainerRegistryImage(fe_ecr_image, "FE Container image", "NodeJSs")
+        }
     }
-    ElasticContainerRegistry("ECR_FE", "ECR", "NodeJSt") {
-        ElasticContainerRegistryImage("FE_ECR_IMAGE", "FE Container image", "NodeJSs")
-    }
-    }
+}
 
-    ingress -u-> FE
-    FE --> API
-    API_ECR_IMAGE -> API
-    FE_ECR_IMAGE -> FE
+ingress -u-> fe
+fe --> api
+api_ecr_image -> api
+fe_ecr_image -> fe
 
-    @enduml
+@enduml
