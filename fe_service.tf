@@ -7,7 +7,6 @@ locals {
   my_fe_development_git_branch = "dev"
 }
 
-
 resource "aws_apprunner_service" "my_fe" {
   depends_on = [
     aws_ecr_repository.my_fe_ecr
